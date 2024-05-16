@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DNS / Проверка кассы</title>
+  <link rel="shortcut icon" href="./images/icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="container">
+    <section class="topWrapper">
+      <div class="currentDate workField">
+        <p class="dateText"></p>
+      </div>
+      <!-- <div class="statuSfield workField">
+              Статус
+            </div> -->
+    </section>
+    <section class="workField cashboxField">
+      <div class="XReport__field card">
+        <h2>Х отчет</h2>
+        <fieldset>
+          <legend>Приходы</legend>
+          <label>Наличными
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="reportX__cashIncome checkInput input" id="reportX__cashIncome">
+            <img class="tipPic visuallyHidden tipRight" src="images/reportX__cashIncome.jpg"
+              alt="Х отчет / Приход / Наличные">
+            <span class="tipLine visuallyHidden tipRight"></span>
+          </label>
+          <label>Плат. картой
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="reportX__cardIncome checkInput input" id="reportX__cardIncome">
+            <img class="tipPic visuallyHidden tipRight" src="images/reportX__cardIncome.jpg"
+              alt="Х отчет / Приход / Картой">
+            <span class="tipLine visuallyHidden tipRight"></span>
+          </label>
+          <label>Иная форма оплаты
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="reportX__exchangeIncome reportXExchangeInput input checkInput"
+              id="reportX__exchangeIncome">
+            <img class="tipPic visuallyHidden tipRight" src="images/reportX__exchangeIncome.jpg"
+              alt="Х отчет / Приход / Иная форма оплаты">
+            <span class="tipLine visuallyHidden tipRight"></span>
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>Расходы</legend>
+          <label>Наличными <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="reportX__cashReturn checkInput input" id="reportX__cashReturn">
+            <img class="tipPic visuallyHidden tipRight" src="images/reportX__cashReturn.jpg"
+              alt="Х отчет / Возврат / Наличные">
+            <span class="tipLine visuallyHidden tipRight"></span>
+          </label>
+          <label>Плат. картой
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="reportX__cardReturn checkInput input" id="reportX__cardReturn">
+            <img class="tipPic visuallyHidden tipRight" src="images/reportX__cardReturn.jpg"
+              alt="Х отчет / Возврат / Картой">
+            <span class="tipLine visuallyHidden tipRight"></span>
+          </label>
+          <label>Иная форма оплаты
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="reportX__exchangeReturn reportXExchangeInput input checkInput"
+              id="reportX__exchangeReturn">
+            <img class="tipPic visuallyHidden tipRight" src="images/reportX__exchangeReturn.jpg"
+              alt="Х отчет / Возврат / Иная форма оплаты">
+            <span class="tipLine visuallyHidden tipRight"></span>
+          </label>
+        </fieldset>
+      </div>
+      <div class="terminals__field">
+        <div class="sberbank__field card">
+          <h2>Сверка Сбербанк</h2>
+          <label>Оплата <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="sberbank__income checkInput input" id="sberbank__income">
+            <img class="tipPic visuallyHidden tipRight" src="images/sberbank__income.jpg"
+              alt="Сверка сбербанк / Оплата">
+            <span class="tipLine visuallyHidden tipRight"></span>
+          </label>
+          <label>Отмена <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="sberbank__cancel checkInput input" id="sberbank__cancel">
+            <img class="tipPic visuallyHidden tipRight" src="images/sberbank__cancel.jpg"
+              alt="Сверка сбербанк / Отмена">
+            <span class="tipLine visuallyHidden tipRight"></span>
+          </label>
+          <label>Возврат <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="sberbank__return checkInput input" id="sberbank__return">
+            <img class="tipPic visuallyHidden tipRight" src="images/sberbank__return.jpg"
+              alt="Сверка сбербанк / Возврат">
+            <span class="tipLine visuallyHidden tipRight"></span>
+          </label>
+        </div>
+        <div class="BRS__Field card">
+          <h2>Сверка БРС</h2>
+          <label>Общий итог / оплаты
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="BRS__income checkInput input" id="BRS__income">
+            <img class="tipPic visuallyHidden tipRight tipPicBRS" src="images/BRSIncome.jpg" alt="Сверка БРС">
+            <span class="tipLine visuallyHidden tipRight"></span>
+          </label>
+          <label>Общий итог / возвраты
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="BRS__return checkInput input" id="BRS__return">
+            <img class="tipPic visuallyHidden tipRight tipPicBRS" src="images/BRSReturn.jpg" alt="Сверка БРС">
+            <span class="tipLine visuallyHidden tipRight"></span>
+          </label>
+        </div>
+      </div>
+      <div class="cashierReport__field card">
+        <h2>Отчет кассира<br/>(терминалы)</h2>
+        <label>Сбербанк приход
+          <span class="tipQuestionMark visuallyHidden">?</span>
+          <input type="number" class="cashierReport__sberbankIncome checkInput input"
+            id="cashierReport__sberbankIncome">
+          <img class="tipPic visuallyHidden tipLeft" src="images/cashierReport__sberbankIncome.jpg"
+            alt="Отчет кассира / Сбербанк / Приход">
+          <span class="tipLine visuallyHidden tipLeft"></span>
+        </label>
+        <label>Сбербанк расход
+          <span class="tipQuestionMark visuallyHidden">?</span>
+          <input type="number" class="cashierReport__sberbankReturn checkInput input"
+            id="cashierReport__sberbankReturn">
+          <img class="tipPic visuallyHidden tipLeft" src="images/cashierReport__sberbankReturn.jpg"
+            alt="Отчет кассира / Сбербанк / Возврат">
+          <span class="tipLine visuallyHidden tipLeft"></span>
+        </label>
+        <label>БРС приход
+          <span class="tipQuestionMark visuallyHidden tipLeft">?</span>
+          <input type="number" class="cashierReport__BRSIncome checkInput input" id="cashierReport__BRSIncome">
+          <img class="tipPic visuallyHidden tipLeft" src="images/cashierReportBRSIncome.jpg"
+            alt="Отчет кассира / БРС / Приход">
+          <span class="tipLine visuallyHidden tipLeft"></span>
+        </label>
+        <label>БРС расход
+          <span class="tipQuestionMark visuallyHidden tipLeft">?</span>
+          <input type="number" class="cashierReport__BRSReturn checkInput input" id="cashierReport__BRSReturn">
+          <img class="tipPic visuallyHidden tipLeft" src="images/cashierReportBRSReturn.jpg"
+            alt="Отчет кассира / БРС / Возврат">
+          <span class="tipLine visuallyHidden tipLeft"></span>
+        </label>
+        <label>Райффайзен приход
+          <span class="tipQuestionMark visuallyHidden">?</span>
+          <input type="number" class="cashierReport__RaifIncome checkInput input" id="cashierReport__RaifIncome">
+          <img class="tipPic visuallyHidden tipLeft" src="images/cashierReportRaifIncome.jpg"
+            alt="Отчет кассира / Райф / Приход">
+          <span class="tipLine visuallyHidden tipLeft"></span>
+        </label>
+        <label>Райффайзен расход
+          <span class="tipQuestionMark visuallyHidden tipLeft">?</span>
+          <input type="number" class="cashierReport__RaifReturn checkInput input" id="cashierReport__RaifReturn">
+          <img class="tipPic visuallyHidden tipLeft" src="images/cashierReportRaifReturn.jpg"
+            alt="Отчет кассира / Райф / Возврат">
+          <span class="tipLine visuallyHidden tipLeft"></span>
+        </label>
+      </div>
+      <div class="adminReport__field card">
+        <h2>Отчет админа<br/>(наличные)</h2>
+        <label>Оплата продажи
+          <span class="tipQuestionMark visuallyHidden tipLeft">?</span>
+          <input type="number" class="adminReport__cashIncome checkInput input" id="adminReport__cashIncome">
+          <img class="tipPic visuallyHidden tipLeft" src="images/adminReportCashIncome.jpg"
+            alt="Отчет админа / Оплата">
+          <span class="tipLine visuallyHidden tipLeft"></span>
+        </label>
+        <label>ПКО от юр. лиц
+          <span class="tipQuestionMark visuallyHidden tipLeft">?</span>
+          <input type="number" class="adminReport__entityIncome checkInput input" id="adminReport__entityIncome">
+          <img class="tipPic visuallyHidden tipLeft" src="images/adminReportEntityIncome.jpg"
+            alt="Отчет админа / ПКО от ЮЛ">
+          <span class="tipLine visuallyHidden tipLeft"></span>
+        </label>
+        <label>Возврат оплаты
+          <span class="tipQuestionMark visuallyHidden tipLeft">?</span>
+          <input type="number" class="adminReport__cashReturn checkInput input" id="adminReport__cashReturn">
+          <img class="tipPic visuallyHidden tipLeft" src="images/adminReportCashReturn.jpg"
+            alt="Отчет админа / Возврат">
+          <span class="tipLine visuallyHidden tipLeft"></span>
+        </label>
+      </div>
+    </section>
+    <section class="SSTwrapper">
+      <div class="workField SSTField">
+        <div class="card SSTField__sst" id="SST1">
+          <h2>ТСО №1</h2>
+          <label>Х отчет <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="SST1__XReport SSTinput input SST_xReport checkInput" id="SST1__XReport">
+          </label>
+          <label>Сверка итогов
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="SST1__terminalReport SSTinput input SSTterminalReport checkInput" id="SST1__terminalReport">
+          </label>
+          <label>Отчет кассира
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="SST1__cashierReport SSTinput input SSTcashierReport checkInput" id="SST1__cashierReport">
+          </label>
+        </div>
+        <div class="card SSTField__sst" id="SST2">
+          <h2>ТСО №2</h2>
+          <label>Х отчет <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="SST2__XReport SSTinput input SST_xReport checkInput" id="SST2__XReport">
+          </label>
+          <label>Сверка итогов
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="SST2__terminalReport SSTinput input SSTterminalReport checkInput"
+              id="SST2__terminalReport">
+          </label>
+          <label>Отчет кассира
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="SST2__cashierReport SSTinput input SSTcashierReport checkInput" id="SST2__cashierReport">
+          </label>
+        </div>
+        <div class="card SSTField__sst" id="SST3">
+          <h2>ТСО №3</h2>
+          <label>Х отчет <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="SST3__XReport SSTinput input SST_xReport checkInput" id="SST3__XReport">
+          </label>
+          <label>Сверка итогов
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="SST3__terminalReport SSTinput input SSTterminalReport checkInput" id="SST3__terminalReport">
+          </label>
+          <label>Отчет кассира
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="SST3__cashierReport SSTinput input SSTcashierReport checkInput" id="SST3__cashierReport">
+          </label>
+        </div>
+        <div class="card SSTField__sst" id="SST4">
+          <h2>ТСО №4</h2>
+          <label>Х отчет <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="SST4__XReport SSTinput input SST_xReport checkInput" id="SST4__XReport">
+          </label>
+          <label>Сверка итогов
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="SST4__terminalReport SSTinput input SSTterminalReport checkInput"
+              id="SST4__terminalReport">
+          </label>
+          <label>Отчет кассира
+            <span class="tipQuestionMark visuallyHidden">?</span>
+            <input type="number" class="SST4__cashierReport SSTinput input SSTcashierReport checkInput" id="SST4__cashierReport">
+          </label>
+        </div>
+      </div>
+      <button class="SSTAddButton SSTbutton" disabled></button>
+      <button class="SSTRemoveButton SSTbutton"></button>
+    </section>
+  </main>
+  <footer class="footer">
+    <a href="mailto:bobov.a@dns-shop.ru" class="footer_link">
+      <img src="./images/mail.svg" alt="Почта" class="footer_img">
+      <span class="footer_span">bobov.a@dns-shop.ru</span>
+    </a>
+    <a href="https://t.me/BobovAM" class="footer_link">
+      <img src="./images/tg.svg" alt="Телеграм" class="footer_img">
+      <span class="footer_span">https://t.me/BobovAM</span>
+    </a>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
