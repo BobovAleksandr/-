@@ -202,7 +202,8 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 25px;
   height: 50px;
   border: none;
-  background-color: #8bc6ec;
+  /* background-color: #8bc6ec; */
+  background-color: #ffffff;
   /* background-color: #000e41; */
   background-repeat: no-repeat;
   background-position: center center;
@@ -210,20 +211,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .SSTbutton:hover {
-  background-color: rgb(110, 184, 230);
-}
-
-.SSTAddButton {
-  top: 61px;
-  right: -25px;
-  border-top-right-radius: 15px;
-  background-image: url(images/caretR.png);
-}
-
-.SSTRemoveButton {
-  bottom: 61px;
-  border-bottom-right-radius: 15px;
-  background-image: url(images/caretL.png);
+  background-color: rgb(228, 228, 228);
 }
 
 .SSTbutton[disabled] {
@@ -232,7 +220,23 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .SSTbutton[disabled]:hover {
-  background-color: #8bc6ec;
+  background-color: #ffffff;
+}
+
+.SSTAddButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 61px;
+  right: -25px;
+  border-top-right-radius: 15px;
+  background-image: url(images/caretR.png); 
+}
+
+.SSTRemoveButton {
+  bottom: 61px;
+  border-bottom-right-radius: 15px;
+  background-image: url(images/caretL.png);
 }
 
 .tipQuestionMark {
@@ -281,6 +285,18 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .tipPic.tipRight.tipPicBRS {
   top: -250px;
+}
+
+.tipPic.tipPicSST {
+  top: -100px;
+}
+
+.tipPic.tipPicSST.tipPicSSTTerminalReport {
+  top: -170px;
+}
+
+.tipPic.tipPicSST.tipPicSSTCashierReport {
+  top: -210px;
 }
 
 .footer {

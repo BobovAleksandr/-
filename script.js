@@ -253,22 +253,8 @@ const cashierReportRaifReturn = document.querySelector(
 const cardInput = document.querySelectorAll(".cardInput");
 
 let checkCards = () => {
-  checkCardsBasic(
-    reportXCardIncome,
-    sberbankIncome,
-    BRSIncome,
-    cashierReportSberbankIncome,
-    cashierReportBRSIncome,
-    cashierReportRaifIncome
-  );
-  checkCardsBasic(
-    reportXCardReturn,
-    sberbankReturn,
-    BRSReturn,
-    cashierReportSberbankReturn,
-    cashierReportBRSReturn,
-    cashierReportRaifReturn
-  );
+  checkCardsBasic( reportXCardIncome, sberbankIncome, BRSIncome, cashierReportSberbankIncome, cashierReportBRSIncome, cashierReportRaifIncome);
+  checkCardsBasic( reportXCardReturn, sberbankReturn, BRSReturn, cashierReportSberbankReturn, cashierReportBRSReturn, cashierReportRaifReturn);
 
   checkTwoCorrectInputs(BRSIncome, cashierReportBRSIncome);
   checkTwoCorrectInputs(BRSReturn, cashierReportBRSReturn);
@@ -276,34 +262,10 @@ let checkCards = () => {
   checkTwoCorrectInputs(sberbankIncome, cashierReportSberbankIncome);
   checkTwoCorrectInputs(sberbankReturn, cashierReportSberbankReturn);
 
-  checkTwoCorrectInputs(
-    reportXCardIncome,
-    sberbankIncome,
-    BRSIncome,
-    cashierReportBRSIncome,
-    cashierReportRaifIncome
-  );
-  checkTwoCorrectInputs(
-    reportXCardIncome,
-    BRSIncome,
-    sberbankIncome,
-    cashierReportSberbankIncome,
-    cashierReportRaifIncome
-  );
-  checkTwoCorrectInputs(
-    reportXCardReturn,
-    BRSReturn,
-    sberbankReturn,
-    cashierReportSberbankReturn,
-    cashierReportRaifReturn
-  );
-  checkTwoCorrectInputs(
-    reportXCardReturn,
-    sberbankReturn,
-    BRSReturn,
-    cashierReportBRSReturn,
-    cashierReportRaifReturn
-  );
+  checkTwoCorrectInputs(reportXCardIncome, sberbankIncome, BRSIncome, cashierReportBRSIncome, cashierReportRaifIncome);
+  checkTwoCorrectInputs(reportXCardIncome, BRSIncome, sberbankIncome, cashierReportSberbankIncome, cashierReportRaifIncome);
+  checkTwoCorrectInputs(reportXCardReturn, BRSReturn, sberbankReturn, cashierReportSberbankReturn, cashierReportRaifReturn);
+  checkTwoCorrectInputs(reportXCardReturn, sberbankReturn, BRSReturn, cashierReportBRSReturn, cashierReportRaifReturn);
 
   checkXandTerminalTotal(reportXCardIncome, sberbankIncome, BRSIncome);
   checkXandTerminalTotal(reportXCardReturn, sberbankReturn, BRSReturn);
@@ -341,35 +303,28 @@ let SST4XReport = document.getElementById("SST4__XReport");
 let SST4terminalReport = document.getElementById("SST4__terminalReport");
 let SST4cashierReport = document.getElementById("SST4__cashierReport");
 
-
+// Функция проверки input'ов ТСО
 let checkSST = function (xReport, terminalReport, cashierReport) {
-  console.log('LOX')
   if (xReport.value || terminalReport.value || cashierReport.value) {
     if (
       (xReport.value === terminalReport.value) &&
       (xReport.value === cashierReport.value)
     ) {
-      console.log("1");
       makeCorrect(xReport, terminalReport, cashierReport);
     } else {
-      console.log("2");
       makeWrong(xReport, terminalReport, cashierReport);
     }
 
     if (xReport.value && terminalReport.value && (xReport.value === terminalReport.value)) {
-      console.log("3");
       makeCorrect(xReport, terminalReport);
     }
     if (xReport.value && cashierReport.value && (xReport.value === cashierReport.value)) {
-      console.log("4");
       makeCorrect(xReport, cashierReport);
     }
     if (terminalReport.value && cashierReport.value && (terminalReport.value === cashierReport.value)) {
-      console.log("5");
       makeCorrect(terminalReport, cashierReport);
     }
   } else {
-    console.log("6");
     makeEmptyIfNull(
       xReport, 
       terminalReport, 
@@ -379,6 +334,7 @@ let checkSST = function (xReport, terminalReport, cashierReport) {
   saveSSTData();
 };
 
+// Функция сброса статуса полей ввода ТСО
 let resetSSTinputStatus = function () {
   console.log("status reseted");
   makeEmptyIfNull(
@@ -446,13 +402,7 @@ function restoreDisabledButtonStatus() {
   }
 }
 
-// Функция сохраняет HTML-содержимое блока с классом SSTField в LocalStorage
-// function saveSSTData() {
-//   localStorage.setItem("sstData", sstField.innerHTML);
-//   saveButtonStatus();
-// }
-
-
+// Функция сохраняет статус карточек ТСО в Local Storage
 function saveSSTData() {
   let isSST1disabled = sst1.classList.contains('SST__disabled');
   let isSST2disabled = sst2.classList.contains('SST__disabled');
@@ -467,8 +417,41 @@ function saveSSTData() {
   saveButtonStatus();
 }
 
+// Функция загружает статусы карточек ТСО
+function loadSST() {
+  const SST1status = localStorage.getItem("isSST1disabled");
+  const SST2status = localStorage.getItem("isSST2disabled");
+  const SST3status = localStorage.getItem("isSST3disabled");
+  const SST4status = localStorage.getItem("isSST4disabled");
 
+  if (SST1status === "true") {
+    sst1.classList.add('SST__disabled')
+  } else {
+    sst1.classList.remove('SST__disabled')
+  }
+  if (SST2status === "true") {
+    sst2.classList.add('SST__disabled')
+  } else {
+    sst2.classList.remove('SST__disabled')
+  }
+  if (SST3status === "true") {
+    sst3.classList.add('SST__disabled')
+  } else {
+    sst3.classList.remove('SST__disabled')
+  }
+  if (SST4status === "true") {
+    sst4.classList.add('SST__disabled')
+  } else {
+    sst4.classList.remove('SST__disabled')
+  }
 
+  restoreDisabledButtonStatus()
+
+  sstEnabledList = Array.from(sstField.children).filter(el => !el.classList.contains('SST__disabled'))
+  sstDisabledList = Array.from(document.querySelectorAll('.SSTField .SST__disabled'))
+}
+
+// Добавить и убрать ТСО
 let addSST = () => {
   sstEnabledList[sstEnabledList.length - 1].classList.add("SST__disabled");
   sstEnabledList = Array.from(sstField.children).filter(
@@ -502,50 +485,6 @@ let removeSST = () => {
   }
   saveSSTData();
 };
-
-// Функция загружает HTML-содержимое блока с классом SSTField в LocalStorage и запускает restoreDisabledButtonStatus()
-// function loadSST() {
-//   if (localStorage.getItem('sstData')) {
-//     sstField.innerHTML = localStorage.getItem('sstData')
-//     restoreDisabledButtonStatus()
-//     sstEnabledList = Array.from(sstField.children).filter(el => !el.classList.contains('SST__disabled'))
-//     sstDisabledList = Array.from(document.querySelectorAll('.SSTField .SST__disabled'))
-//   }
-//   //resetSSTinputStatus()
-// }
-
-function loadSST() {
-  const SST1status = localStorage.getItem("isSST1disabled");
-  const SST2status = localStorage.getItem("isSST2disabled");
-  const SST3status = localStorage.getItem("isSST3disabled");
-  const SST4status = localStorage.getItem("isSST4disabled");
-
-  if (SST1status === "true") {
-    sst1.classList.add('SST__disabled')
-  } else {
-    sst1.classList.remove('SST__disabled')
-  }
-  if (SST2status === "true") {
-    sst2.classList.add('SST__disabled')
-  } else {
-    sst2.classList.remove('SST__disabled')
-  }
-  if (SST3status === "true") {
-    sst3.classList.add('SST__disabled')
-  } else {
-    sst3.classList.remove('SST__disabled')
-  }
-  if (SST4status === "true") {
-    sst4.classList.add('SST__disabled')
-  } else {
-    sst4.classList.remove('SST__disabled')
-  }
-
-  restoreDisabledButtonStatus()
-
-  sstEnabledList = Array.from(sstField.children).filter(el => !el.classList.contains('SST__disabled'))
-  sstDisabledList = Array.from(document.querySelectorAll('.SSTField .SST__disabled'))
-}
 
 
 // -------------------- Появление подсказок --------------------------------------------------------------------------------
