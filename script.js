@@ -74,10 +74,10 @@ let checkCardsBasic = function (
     +value6.value
   ) {
     if (
-      +value1.value === +value2.value + +value3.value + +value6.value &&
-      +value1.value === +value4.value + +value5.value + +value6.value &&
-      +value2.value === +value4.value &&
-      +value3.value === +value5.value
+      (+value1.value === (+value2.value + +value3.value + +value6.value)) &&
+      (+value1.value === (+value4.value + +value5.value + +value6.value)) &&
+      (+value2.value === +value4.value) &&
+      (+value3.value === +value5.value)
     ) {
       makeCorrect(value1, value2, value3, value4, value5, value6);
     } else {
@@ -336,7 +336,6 @@ let checkSST = function (xReport, terminalReport, cashierReport) {
 
 // Функция сброса статуса полей ввода ТСО
 let resetSSTinputStatus = function () {
-  console.log("status reseted");
   makeEmptyIfNull(
     SST1XReport,
     SST1terminalReport,
@@ -550,8 +549,6 @@ document.addEventListener("input", function (event) {
     event.target.classList.contains("SST1__terminalReport") ||
     event.target.classList.contains("SST1__cashierReport")
   ) {
-    console.log('listen 1')
-    console.log(SST1XReport, SST1terminalReport, SST1cashierReport)
     checkSST(SST1XReport, SST1terminalReport, SST1cashierReport);
   }
   if (
@@ -559,8 +556,6 @@ document.addEventListener("input", function (event) {
     event.target.classList.contains("SST2__terminalReport") ||
     event.target.classList.contains("SST2__cashierReport")
   ) {
-    console.log('listen 2')
-    console.log(SST2XReport, SST2terminalReport, SST2cashierReport)
     checkSST(SST2XReport, SST2terminalReport, SST2cashierReport);
   }
   if (
@@ -568,8 +563,6 @@ document.addEventListener("input", function (event) {
     event.target.classList.contains("SST3__terminalReport") ||
     event.target.classList.contains("SST3__cashierReport")
   ) {
-    console.log('listen 3')
-    console.log(SST3XReport, SST3terminalReport, SST3cashierReport)
     checkSST(SST3XReport, SST3terminalReport, SST3cashierReport);
   }
   if (
@@ -577,8 +570,6 @@ document.addEventListener("input", function (event) {
     event.target.classList.contains("SST4__terminalReport") ||
     event.target.classList.contains("SST4__cashierReport")
   ) {
-    console.log('listen 4')
-    console.log(SST4XReport, SST4terminalReport, SST4cashierReport)
     checkSST(SST4XReport, SST4terminalReport, SST4cashierReport);
   }
 });
