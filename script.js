@@ -1,3 +1,20 @@
+// -------------------- Переменные иной формы оплаты --------------------------------------------------------------------------------
+
+const reportXExchangeIncome = document.getElementById(
+  "reportX__exchangeIncome"
+);
+const reportXExchangeReturn = document.getElementById(
+  "reportX__exchangeReturn"
+);
+
+
+// -------------------- Переменные наличных / возврат --------------------------------------------------------------------------------
+
+const reportXCashReturn = document.querySelector(".reportX__cashReturn");
+const adminReportCashReturn = document.querySelector(
+  ".adminReport__cashReturn"
+);
+
 // -------------------- Функции смены статуса полей ввода --------------------------------------------------------------------------------
 
 let makeCorrect = (...params) => {
@@ -44,6 +61,19 @@ let makeWrongIfNull = (...params) => {
 
 // -------------------- Функции проверки полей ввода --------------------------------------------------------------------------------
 
+// Сравнение двух input'ов
+let compareTwo = function(elem1, elem2) {
+  if (+elem1.value || +elem2.value) {
+    if (+elem1.value === +elem2.value) {
+      makeCorrect(elem1, elem2)
+    } else {
+      makeWrong(elem1, elem2)
+    }
+  } else {
+    makeEmptyIfNull(elem1, elem2)
+  }
+}
+
 // Отмечает зеленым два равных input'a, остальные делает пустыми
 let checkTwoCorrectInputs = function (elem1, elem2, ...params) {
   if (+elem1.value && +elem2.value && +elem1.value === +elem2.value) {
@@ -55,6 +85,7 @@ let checkTwoCorrectInputs = function (elem1, elem2, ...params) {
 };
 
 // Проверяет действия по карам по всем трём отчетам
+// value1             value2          value3     value4                       value5                  value6
 // reportXCardIncome, sberbankIncome, BRSIncome, cashierReportSberbankIncome, cashierReportBRSIncome, cashierReportRaifIncome
 // reportXCardReturn, sberbankReturn, BRSReturn, cashierReportSberbankReturn, cashierReportBRSReturn, cashierReportRaifReturn
 let checkCardsBasic = function (
@@ -118,33 +149,6 @@ let checkXandTerminalTotal = function (elem1, elem2, elem3) {
   }
 };
 
-// -------------------- Проверка иной формы оплаты --------------------------------------------------------------------------------
-
-const reportXExchangeIncome = document.getElementById(
-  "reportX__exchangeIncome"
-);
-const reportXExchangeReturn = document.getElementById(
-  "reportX__exchangeReturn"
-);
-
-let checkReportXExchange = () => {
-  if (+reportXExchangeIncome.value || +reportXExchangeReturn.value) {
-    if (+reportXExchangeIncome.value === +reportXExchangeReturn.value) {
-      makeCorrect(reportXExchangeIncome, reportXExchangeReturn);
-    } else {
-      makeWrong(reportXExchangeIncome, reportXExchangeReturn);
-      if (+reportXExchangeIncome.value < +reportXExchangeReturn.value) {
-        console.log("Сумма расхода больше");
-      } else {
-        console.log("Сумма прихода больше");
-      }
-    }
-  } else {
-    makeEmpty(reportXExchangeIncome);
-    makeEmpty(reportXExchangeReturn);
-  }
-};
-
 // -------------------- Проверка наличных / приход --------------------------------------------------------------------------------
 
 const adminReportEntityIncome = document.querySelector(
@@ -196,32 +200,6 @@ let checkCashIncome = () => {
   }
 };
 
-// -------------------- Проверка наличных / возврат --------------------------------------------------------------------------------
-
-const reportXCashReturn = document.querySelector(".reportX__cashReturn");
-const adminReportCashReturn = document.querySelector(
-  ".adminReport__cashReturn"
-);
-
-let checkCashReturn = () => {
-  if (+reportXCashReturn.value || +adminReportCashReturn.value) {
-    if (+reportXCashReturn.value === +adminReportCashReturn.value) {
-      makeCorrect(reportXCashReturn);
-      makeCorrect(adminReportCashReturn);
-    } else {
-      makeWrong(reportXCashReturn);
-      makeWrong(adminReportCashReturn);
-      if (+reportXCashReturn.value > +adminReportCashReturn.value) {
-        console.log("Сумма в Х отчете больше");
-      } else {
-        console.log("Сумма в Х отчете меньше");
-      }
-    }
-  } else {
-    makeEmpty(reportXCashReturn);
-    makeEmpty(adminReportCashReturn);
-  }
-};
 
 // -------------------- Проверка карт ----------------------------------------------------------------------------------------------------
 
@@ -252,9 +230,10 @@ const cashierReportRaifReturn = document.querySelector(
 );
 const cardInput = document.querySelectorAll(".cardInput");
 
+
 let checkCards = () => {
-  checkCardsBasic( reportXCardIncome, sberbankIncome, BRSIncome, cashierReportSberbankIncome, cashierReportBRSIncome, cashierReportRaifIncome);
-  checkCardsBasic( reportXCardReturn, sberbankReturn, BRSReturn, cashierReportSberbankReturn, cashierReportBRSReturn, cashierReportRaifReturn);
+  checkCardsBasic(reportXCardIncome, sberbankIncome, BRSIncome, cashierReportSberbankIncome, cashierReportBRSIncome, cashierReportRaifIncome);
+  checkCardsBasic(reportXCardReturn, sberbankReturn, BRSReturn, cashierReportSberbankReturn, cashierReportBRSReturn, cashierReportRaifReturn);
 
   checkTwoCorrectInputs(BRSIncome, cashierReportBRSIncome);
   checkTwoCorrectInputs(BRSReturn, cashierReportBRSReturn);
@@ -540,9 +519,9 @@ document.addEventListener("input", function (event) {
   if (event.target.classList.contains("checkInput")) {
     checkCards();
     checkCancel();
-    checkReportXExchange();
     checkCashIncome();
-    checkCashReturn();
+    compareTwo(reportXExchangeIncome, reportXExchangeReturn)
+    compareTwo(reportXCashReturn, adminReportCashReturn)
   }
   if (
     event.target.classList.contains("SST1__XReport") ||
