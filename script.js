@@ -59,6 +59,15 @@ let makeWrongIfNull = (...params) => {
   }
 };
 
+let makeWrongIfValue = (...params) => {
+  for (let i = 0; i < params.length; i++) {
+    if (+params[i].value) {
+      params[i].classList.remove("inputCorrect");
+      params[i].classList.add("inputWrong");
+    }
+  }
+};
+
 // -------------------- Функции проверки полей ввода --------------------------------------------------------------------------------
 
 // Сравнение двух input'ов
@@ -88,34 +97,62 @@ let checkTwoCorrectInputs = function (elem1, elem2, ...params) {
 // value1             value2          value3     value4                       value5                  value6
 // reportXCardIncome, sberbankIncome, BRSIncome, cashierReportSberbankIncome, cashierReportBRSIncome, cashierReportRaifIncome
 // reportXCardReturn, sberbankReturn, BRSReturn, cashierReportSberbankReturn, cashierReportBRSReturn, cashierReportRaifReturn
-let checkCardsBasic = function (
-  value1,
-  value2,
-  value3,
-  value4,
-  value5,
-  value6
-) {
-  if (
-    +value1.value ||
-    +value2.value ||
-    +value3.value ||
-    +value4.value ||
-    +value5.value ||
-    +value6.value
-  ) {
-    if (
-      (+value1.value === (+value2.value + +value3.value + +value6.value)) &&
-      (+value1.value === (+value4.value + +value5.value + +value6.value)) &&
-      (+value2.value === +value4.value) &&
-      (+value3.value === +value5.value)
-    ) {
-      makeCorrect(value1, value2, value3, value4, value5, value6);
+
+
+let checkCardsBasic = function () {
+  let xReportTotal = (+reportXCardIncome.value - +reportXCardReturn.value)
+  let terminalReportTotal = (+sberbankIncome.value - +sberbankReturn.value + +BRSIncome.value - +BRSReturn.value)
+  let cashierReportTotal = (+cashierReportSberbankIncome.value + +cashierReportBRSIncome.value + +cashierReportRaifIncome.value - +cashierReportSberbankReturn.value - +cashierReportBRSReturn.value - +cashierReportRaifReturn.value)
+
+  if ((+reportXCardIncome.value || +reportXCardReturn.value) && 
+  (+sberbankIncome.value || +sberbankReturn.value || +BRSIncome.value || +BRSReturn.value) && 
+  (+cashierReportSberbankIncome.value || +cashierReportBRSIncome.value || +cashierReportRaifIncome.value || +cashierReportSberbankReturn.value || +cashierReportBRSReturn.value || +cashierReportRaifReturn.value)) {
+    if ((xReportTotal === terminalReportTotal) && (xReportTotal === cashierReportTotal)) {
+      makeCorrect(
+        reportXCardIncome, 
+        sberbankIncome,
+        BRSIncome,
+        cashierReportSberbankIncome,
+        cashierReportBRSIncome,
+        cashierReportRaifIncome,
+        reportXCardReturn,
+        sberbankReturn,
+        BRSReturn,
+        cashierReportSberbankReturn,
+        cashierReportBRSReturn,
+        cashierReportRaifReturn,
+      )
     } else {
-      makeWrong(value1, value2, value3, value4, value5, value6);
+      makeWrongIfValue(
+        reportXCardIncome, 
+        sberbankIncome,
+        BRSIncome,
+        cashierReportSberbankIncome,
+        cashierReportBRSIncome,
+        cashierReportRaifIncome,
+        reportXCardReturn,
+        sberbankReturn,
+        BRSReturn,
+        cashierReportSberbankReturn,
+        cashierReportBRSReturn,
+        cashierReportRaifReturn,
+      )
     }
   } else {
-    makeEmptyIfNull(value1, value2, value3, value4, value5, value6);
+    makeEmpty(
+        reportXCardIncome, 
+        sberbankIncome,
+        BRSIncome,
+        cashierReportSberbankIncome,
+        cashierReportBRSIncome,
+        cashierReportRaifIncome,
+        reportXCardReturn,
+        sberbankReturn,
+        BRSReturn,
+        cashierReportSberbankReturn,
+        cashierReportBRSReturn,
+        cashierReportRaifReturn,
+    )
   }
 };
 
@@ -232,22 +269,21 @@ const cardInput = document.querySelectorAll(".cardInput");
 
 
 let checkCards = () => {
-  checkCardsBasic(reportXCardIncome, sberbankIncome, BRSIncome, cashierReportSberbankIncome, cashierReportBRSIncome, cashierReportRaifIncome);
-  checkCardsBasic(reportXCardReturn, sberbankReturn, BRSReturn, cashierReportSberbankReturn, cashierReportBRSReturn, cashierReportRaifReturn);
+  checkCardsBasic();
 
-  checkTwoCorrectInputs(BRSIncome, cashierReportBRSIncome);
-  checkTwoCorrectInputs(BRSReturn, cashierReportBRSReturn);
+  // checkTwoCorrectInputs(BRSIncome, cashierReportBRSIncome);
+  // checkTwoCorrectInputs(BRSReturn, cashierReportBRSReturn);
 
-  checkTwoCorrectInputs(sberbankIncome, cashierReportSberbankIncome);
-  checkTwoCorrectInputs(sberbankReturn, cashierReportSberbankReturn);
+  // checkTwoCorrectInputs(sberbankIncome, cashierReportSberbankIncome);
+  // checkTwoCorrectInputs(sberbankReturn, cashierReportSberbankReturn);
 
-  checkTwoCorrectInputs(reportXCardIncome, sberbankIncome, BRSIncome, cashierReportBRSIncome, cashierReportRaifIncome);
-  checkTwoCorrectInputs(reportXCardIncome, BRSIncome, sberbankIncome, cashierReportSberbankIncome, cashierReportRaifIncome);
-  checkTwoCorrectInputs(reportXCardReturn, BRSReturn, sberbankReturn, cashierReportSberbankReturn, cashierReportRaifReturn);
-  checkTwoCorrectInputs(reportXCardReturn, sberbankReturn, BRSReturn, cashierReportBRSReturn, cashierReportRaifReturn);
+  // checkTwoCorrectInputs(reportXCardIncome, sberbankIncome, BRSIncome, cashierReportBRSIncome, cashierReportRaifIncome);
+  // checkTwoCorrectInputs(reportXCardIncome, BRSIncome, sberbankIncome, cashierReportSberbankIncome, cashierReportRaifIncome);
+  // checkTwoCorrectInputs(reportXCardReturn, BRSReturn, sberbankReturn, cashierReportSberbankReturn, cashierReportRaifReturn);
+  // checkTwoCorrectInputs(reportXCardReturn, sberbankReturn, BRSReturn, cashierReportBRSReturn, cashierReportRaifReturn);
 
-  checkXandTerminalTotal(reportXCardIncome, sberbankIncome, BRSIncome);
-  checkXandTerminalTotal(reportXCardReturn, sberbankReturn, BRSReturn);
+  // checkXandTerminalTotal(reportXCardIncome, sberbankIncome, BRSIncome);
+  // checkXandTerminalTotal(reportXCardReturn, sberbankReturn, BRSReturn);
 };
 
 // -------------------- Проверка карт / Сбербанк сверка / Отмена --------------------------------------------------------------------------------
